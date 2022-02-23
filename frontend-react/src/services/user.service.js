@@ -80,7 +80,7 @@ function _delete(id) {
     return fetch(`/users/${id}`, requestOptions).then(handleResponse);
 }
 
-function handleResponse(response) {
+export function handleResponse(response) {
     return response.text().then(text => {
         let data;
         try {
@@ -89,7 +89,7 @@ function handleResponse(response) {
             data = text;
         }
         if (!response.ok) {
-            if (response.status === 401) {
+            if (response.status === 401 || response.status === 403) {
                 // auto logout if 401 response returned from api
                 logout();
                 window.location.reload(true);
