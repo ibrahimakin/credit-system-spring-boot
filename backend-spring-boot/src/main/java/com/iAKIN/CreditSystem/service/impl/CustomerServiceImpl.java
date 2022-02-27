@@ -12,18 +12,8 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public Boolean create(Customer customer) {
+    public Boolean save(Customer customer) {
         customerRepository.save(customer);
         return true;
-    }
-
-    @Override
-    public Boolean update(Customer customer) {
-        return null;
-    }
-
-    @Override
-    public Boolean delete(Customer customer) {
-        return null;
     }
 }
