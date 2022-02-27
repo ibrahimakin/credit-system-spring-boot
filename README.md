@@ -3,9 +3,10 @@
 ## Backend
 Java Spring Boot  
 PostgreSQL  
-JWT  
 JPA  
-Mockito
+JWT  
+Mockito  
+Swagger
 
 ## Frontend
 ReactJS  
