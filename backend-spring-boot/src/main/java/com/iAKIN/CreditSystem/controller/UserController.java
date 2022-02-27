@@ -26,19 +26,5 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup(@RequestBody @Valid User user) {
-        return userService.signup(user);
-    }
-
-    @DeleteMapping(value = "/{username}")
-    public String delete(@PathVariable String username) {
-        userService.delete(username);
-        return username;
-    }
-
-    @GetMapping(value = "/me")
-    public User whoami(HttpServletRequest req) {
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(userService.whoami(req), User.class);
-    }
+    public String signup(@RequestBody @Valid User user) { return userService.signup(user); }
 }

@@ -1,5 +1,6 @@
 package com.iAKIN.CreditSystem.service.impl;
 
+import com.iAKIN.CreditSystem.exception.NotFoundException;
 import com.iAKIN.CreditSystem.model.CreditResult;
 import com.iAKIN.CreditSystem.model.CreditScore;
 import com.iAKIN.CreditSystem.model.Customer;
@@ -24,7 +25,7 @@ public class CreditServiceImpl implements CreditService {
     public CreditResult getCredit(Customer customer) throws Exception {
         Optional<CreditScore> creditScore = creditScoreRepository.findById(customer.getId());
         if (creditScore.isPresent()) {
-            customerService.create(customer);
+            customerService.save(customer);
             Double score = creditScore.get().getScore();
             if (score < 500) {
                 return new CreditResult(false, "Your loan application has been rejected.", 0.0, new Date());
@@ -38,7 +39,7 @@ public class CreditServiceImpl implements CreditService {
                 return new CreditResult(true, "Your loan application has been approved.", customer.getMonthlyIncome() * LIMIT_MULTIPLIER, new Date());
             }
         } else {
-            throw new Exception("Score not found");
+            throw new NotFoundException("Score");
         }
     }
 }
