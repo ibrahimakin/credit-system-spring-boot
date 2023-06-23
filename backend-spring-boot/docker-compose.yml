@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  credit-system:
+    image: credit-system-app
+    build: ./
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - postgres-db
+      - rabbitmq
+    links:
+      - postgres-db
+      - rabbitmq
+
+  postgres-db:
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Aa12345!
+      - POSTGRES_DB=credit-system
+
+  rabbitmq:
+    image: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
